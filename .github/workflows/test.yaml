@@ -16,3 +16,5 @@ jobs:
         run: npm init -y
       - name: Install Firebase
         run: npm install firebase 
+      - name: Creating dist library
+        run: npm run build
