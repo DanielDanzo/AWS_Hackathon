@@ -68,13 +68,17 @@ body{
 
 
 .form p {
+  display: none;
   transition: opacity 1s ease-in, transform 1s ease-in;
   opacity: 0;
   transform: translateY(20px);
 }
 
 .form p.show {
+  display:block;
   opacity: 1;
   transform: translateY(0);
+  color: #ff0000;
 }
+
 
