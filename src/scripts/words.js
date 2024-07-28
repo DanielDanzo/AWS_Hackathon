@@ -1,4 +1,6 @@
-
+const result_div = document.getElementById('result-div')
+const searchbtn = document.getElementById('submit-btn')
+const text_field = document.getElementById('text-field')
 
 
 async function getDefinition(word){
@@ -14,8 +16,16 @@ async function getDefinition(word){
 	try {
 		const response = await fetch(url, options);
 		const result = await response.text();
-		console.log(result);
+		
+		const text = document.createElement('p')
+		text.textContent = result;
+
+		result_div.appendChild(text);
 	} catch (error) {
 		console.error(error);
 	}
 }
+
+searchbtn.addEventListener('click',()=>{
+	getDefinition(text_field.value);
+});
