@@ -1,9 +1,7 @@
-console.log('Hello')
-console.log('Mello')
 
 
 
-/*
+
 const url = 'https://dictionary-by-api-ninjas.p.rapidapi.com/v1/dictionary?word=bright';
 const options = {
 	method: 'GET',
@@ -19,4 +17,4 @@ try {
 	console.log(result);
 } catch (error) {
 	console.error(error);
-}*/
+}
