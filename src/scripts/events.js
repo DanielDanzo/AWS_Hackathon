@@ -2,7 +2,7 @@
 
 async function fetchEvents() {
     try {
-        const response = await fetch('http://localhost:8000/src/API/events');
+        const response = await fetch('http://localhost:8000/events');
         const events = await response.json();
         displayEvents(events);
     } catch (error) {
