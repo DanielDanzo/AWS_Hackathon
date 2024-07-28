@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display Bursaries</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #f9f9f9;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .bursary-name {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .bursary-url {
+            color: blue;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bursaries</h1>
+    <button id="fetchBursaries">Fetch Bursaries</button>
+    <ul id="bursariesList"></ul>
+
+    <script>
+        document.getElementById("fetchBursaries").addEventListener("click", async () => {
+            try {
+                const response = await fetch("http://localhost:8000/bursaries");
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.statusText}`);
+                }
+                const data = await response.json();
+                const bursariesArray = [];
+                const bursariesList = document.getElementById("bursariesList");
+                bursariesList.innerHTML = ""; // Clear the list before appending new items
+
+                data.forEach(bursary => {
+                    bursariesArray.push(bursary);
+                    const li = document.createElement("li");
+
+                    const name = document.createElement("div");
+                    name.className = "bursary-name";
+                    name.textContent = bursary.name;
+
+                    const description = document.createElement("div");
+                    description.textContent = bursary.description;
+
+                    const deadline = document.createElement("div");
+                    deadline.textContent = `Deadline: ${new Date(bursary.deadline).toLocaleDateString()}`;
+
+                    const url = document.createElement("a");
+                    url.className = "bursary-url";
+                    url.href = bursary.url;
+                    url.textContent = bursary.url;
+                    url.target = "_blank";
+
+                    li.appendChild(name);
+                    li.appendChild(description);
+                    li.appendChild(deadline);
+                    li.appendChild(url);
+                    bursariesList.appendChild(li);
+                });
+
+                console.log(bursariesArray); // For debugging: check the array in console
+            } catch (error) {
+                console.error("Failed to fetch bursaries:", error);
+            }
+        });
+    </script>
+</body>
+</html>

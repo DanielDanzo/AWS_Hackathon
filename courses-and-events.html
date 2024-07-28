@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course and Event List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #courses, #events {
+            margin-top: 20px;
+        }
+        .course, .event {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Course and Event List</h1>
+    <button onclick="fetchCourses()">Fetch Courses</button>
+    <div id="courses"></div>
+
+    <button onclick="fetchEvents()">Fetch Events</button>
+    <div id="events"></div>
+
+    <script>
+        async function fetchCourses() {
+            try {
+                const response = await fetch('http://localhost:8000/courses');
+                const courses = await response.json();
+                displayCourses(courses);
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+            }
+        }
+
+        async function fetchEvents() {
+            try {
+                const response = await fetch('http://localhost:8000/events');
+                const events = await response.json();
+                displayEvents(events);
+            } catch (error) {
+                console.error('Error fetching events:', error);
+            }
+        }
+
+        function displayCourses(courses) {
+            const coursesDiv = document.getElementById('courses');
+            coursesDiv.innerHTML = ''; // Clear previous content
+
+            courses.forEach(course => {
+                const courseDiv = document.createElement('div');
+                courseDiv.classList.add('course');
+
+                courseDiv.innerHTML = `
+                    <h2>${course.name}</h2>
+                    <p><strong>URL:</strong> <a href="${course.url}" target="_blank">${course.url}</a></p>
+                    <p><strong>Type:</strong> ${course.type}</p>
+                    <p><strong>Teacher:</strong> ${course.teacher}</p>
+                    <p><strong>Number of People:</strong> ${course.numberOfPeople}</p>
+                    <p><strong>Description:</strong> ${course.description}</p>
+                `;
+
+                coursesDiv.appendChild(courseDiv);
+            });
+        }
+
+        function displayEvents(events) {
+            const eventsDiv = document.getElementById('events');
+            eventsDiv.innerHTML = ''; // Clear previous content
+
+            events.forEach(event => {
+                const eventDiv = document.createElement('div');
+                eventDiv.classList.add('event');
+
+                eventDiv.innerHTML = `
+                    <h2>${event.name}</h2>
+                    <p><strong>Day:</strong> ${event.day}</p>
+                    <p><strong>Platform:</strong> ${event.platform}</p>
+                    <p><strong>Description:</strong> ${event.description}</p>
+                `;
+
+                eventsDiv.appendChild(eventDiv);
+            });
+        }
+    </script>
+</body>
+</html>

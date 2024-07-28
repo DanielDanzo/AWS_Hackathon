@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Form</title>
+</head>
+<body>
+    <form action="http://localhost:8000/submit-student" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br>
+
+        <label for="gpa">GPA:</label>
+        <input type="number" step="0.01" id="gpa" name="gpa" required><br>
+
+        <label for="fullTime">Full Time:</label>
+        <input type="checkbox" id="fullTime" name="fullTime"><br>
+
+        <label for="registerDate">Register Date:</label>
+        <input type="date" id="registerDate" name="registerDate" required><br>
+
+        <label for="graduationDate">Graduation Date:</label>
+        <input type="date" id="graduationDate" name="graduationDate"><br>
+
+        <label for="courses">Courses (comma separated):</label>
+        <input type="text" id="courses" name="courses" required><br>
+
+        <label for="street">Street:</label>
+        <input type="text" id="street" name="address[street]" required><br>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="address[city]" required><br>
+
+        <label for="zip">ZIP:</label>
+        <input type="number" id="zip" name="address[zip]" required><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
