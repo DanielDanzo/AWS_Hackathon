@@ -47,7 +47,7 @@
           <li><a href="about.html">About</a></li>
           <li><a href="courses.html">Courses</a></li>
           <li><a href="ebooks.html">eBooks</a></li>
-          <li><a href="word.html" class="active">Word Finder</a></li>
+          <li><a href="word.html">Word Finder</a></li>
           <li><a href="trainers.html">Trainers</a></li>
           <li><a href="events.html">Events</a></li>
           <li><a href="bursary.html">Bursaries</a></li>
@@ -58,7 +58,7 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="register.html">Register</a>
+      <a id="loginStatus" class="btn-getstarted" href="register.html">Register</a>
 
     </div>
   </header>
@@ -93,27 +93,53 @@
 
         <div class="row justify-content-center">
           <div class="col-lg-6">
-            <form action="forms/register.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form id="registerForm" action="forms/register.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
               <div class="row gy-4">
 
                 <div class="col-md-6">
-                  <input type="text" name="first_name" class="form-control" placeholder="First Name" required="">
+                  <label for="name">Name:</label>
+                  <input style="margin-left: 20px;" type="text" id="name" name="name" required><br>
                 </div>
 
                 <div class="col-md-6">
-                  <input type="text" name="last_name" class="form-control" placeholder="Last Name" required="">
+                  <label for="age">Age:</label>
+                  <input style="margin-left: 20px;" type="number" id="age" name="age" required><br>
                 </div>
 
                 <div class="col-md-12">
-                  <input type="email" class="form-control" name="email" placeholder="Email" required="">
+                  <label for="gpa">GPA:</label>
+                  <input style="margin-left: 33px;" type="number" step="0.01" id="gpa" name="gpa" required><br>
                 </div>
 
                 <div class="col-md-12">
-                  <input type="password" class="form-control" name="password" placeholder="Password" required="">
+                  <label for="fullTime">Full Time:</label>
+                  <input style="margin-left: 20px;" type="checkbox" id="fullTime" name="fullTime"><br>
                 </div>
 
                 <div class="col-md-12">
-                  <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="">
+                  <label for="registerDate">Register Date:</label>
+                  <input style="margin-left: 20px;" type="date" id="registerDate" name="registerDate" required><br>
+                </div>
+                <div class="col-md-12">
+                  <label for="courses">Courses (comma separated):</label>
+                  <input style="margin-left:19px;" type="text" id="courses" name="courses" required><br>
+                </div>
+                <div class="col-md-12">
+                  <label for="street">Street:</label>
+                  <input style="margin-left: 20px;" type="text" id="street" name="address[street]" required><br>
+
+                </div>
+
+                <div class="col-md-12">
+                  <label for="city">City:</label>
+                  <input style="margin-left: 35px;" type="text" id="city" name="address[city]" required><br>
+
+                </div>
+
+                <div class="col-md-12">
+
+                  <label for="zip">ZIP:</label>
+                  <input style="margin-left: 39px;" type="number" id="zip" name="address[zip]" required><br>
                 </div>
 
                 <div class="col-md-12 text-center">
@@ -121,10 +147,15 @@
                   <div class="error-message"></div>
                   <div class="sent-message">Your registration request has been sent. Thank you!</div>
 
-                  <button type="submit" class="btn btn-success rounded-pill">Register</button>
+                  <input type="submit" value="Submit" class="btn btn-success rounded-pill">
+                </div>
+
+                <div class="col-md-12 text-center">
+                  <button id="registerButton" type="button" class="btn btn-success rounded-pill">Register</button>
                 </div>
 
               </div>
+
             </form>
           </div>
         </div>
@@ -158,6 +189,38 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function(event) {
+      var age = document.getElementById("age").value;
+      var gpa = document.getElementById("gpa").value;
+
+      if (age < 0) {
+        alert("Age cannot be negative.");
+        event.preventDefault();
+      }
+
+      if (gpa < 0) {
+        alert("GPA cannot be negative.");
+        event.preventDefault();
+      }
+    });
+
+    document.getElementById("registerButton").addEventListener("click", function() {
+      // Change login status text
+      var registerStatus = document.getElementById("registerStatus");
+      if (registerStatus) {
+        registerStatus.innerText = "Registered";
+      }
+
+      // Change button text
+      this.innerText = "Registered";
+
+      // Optionally, disable the button after registration
+      this.disabled = true;
+    });
+  </script>
 
 </body>
 
