@@ -10,9 +10,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Install dependencies
-        run: npm install
       - name: Initialise Node
         run: npm init -y
       - name: Install Firebase
         run: npm install firebase 
+      - name: npm run start
+        run: npm run start
