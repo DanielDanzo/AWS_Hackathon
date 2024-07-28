@@ -52,6 +52,9 @@
             coursesDiv.innerHTML = ''; // Clear previous content
 
             courses.forEach(course => {
+
+
+                /*
                 const courseDiv = document.createElement('div');
                 courseDiv.classList.add('course');
 
@@ -62,7 +65,30 @@
                     <p><strong>Teacher:</strong> ${course.teacher}</p>
                     <p><strong>Number of People:</strong> ${course.numberOfPeople}</p>
                     <p><strong>Description:</strong> ${course.description}</p>
-                `;
+                `;*/
+
+                const full_card = document.createElement('div');
+                full_card.className = "col-md-6 d-flex align-items-stretch";
+
+                full_card.innerHTML = `
+                    <div class="col-md-6 d-flex align-items-stretch">
+                        <div class="card">
+                            <div class="card-img">
+                                <img src="assets/img/events-item-1.jpg" alt="...">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="">${course.name}</a></h5>
+                                <p class="fst-italic text-center">Sunday, August 15th at 7:00 pm</p>
+                                <p class="fst-italic text-center">Platform: Zoom</p>
+                                <p class="card-text">${course.description}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                `
+
+
+                
 
                 coursesDiv.appendChild(courseDiv);
             });

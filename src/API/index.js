@@ -6,6 +6,7 @@ const port = 8000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
 const uri = "mongodb+srv://TD-KMS:Starco05@cluster0.f46xymx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(uri);
