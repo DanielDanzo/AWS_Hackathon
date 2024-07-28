@@ -16,5 +16,3 @@ jobs:
         run: npm init -y
       - name: Install Firebase
         run: npm install firebase 
-      - name: running node
-        run: node ./src/API/index.js
