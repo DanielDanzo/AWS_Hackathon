@@ -2,6 +2,7 @@ const express = require('express');
 const { MongoClient } = require('mongodb');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { connect } = require('mongoose');
 const app = express();
 const port = 8000;
 
@@ -22,6 +23,20 @@ app.post('/submit-student', async (req, res) => {
     } catch (error) {
         res.status(500).send(error.message);
     } finally {
+        await client.close();
+    }
+});
+
+app.post('/courses', async (req, res) =>{
+    const courseData = req.body;
+
+    try {
+        await client.connect();
+        const result = await createCourse(client, courseData);
+        res.status(201).send(` New course created with the following id: ${result.insertedId}`);
+    } catch (error) {
+        res.status(500). send(error.message);
+    }finally{
         await client.close();
     }
 });
@@ -64,6 +79,11 @@ app.get('/bursaries', async (req, res) => {
 
 async function createStudent(client, newStudent) {
     const result = await client.db("test").collection("students").insertOne(newStudent);
+    return result;
+}
+
+async function createCourse(client, newCourse) {
+    const result = await client.db("test").collection("course").insertOne(newCourse);
     return result;
 }
 
